@@ -1,0 +1,29 @@
+{
+  "name": "@petite-org/url-store",
+  "module": "src/index.ts",
+  "version": "0.0.1",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
+  "scripts": {
+    "build": "bun build --target=node ./src/index.ts --outfile=dist/index.js && bun run build:declaration",
+    "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json",
+    "postbuild": "rimraf tsconfig.types.tsbuildinfo"
+  },
+  "dependencies": {
+    "@alttiri/base85": "^1.7.5",
+    "cbor-x": "^1.6.0",
+    "fflate": "^0.8.2",
+    "rimraf": "^6.0.1"
+  }
+}
