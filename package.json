@@ -1,7 +1,7 @@
 {
   "name": "@petite-org/url-store",
   "module": "dist/index.js",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
@@ -10,15 +10,15 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "peerDependencies": {
-    "@alttiri/base85": "^1.7.5",
-    "cbor-x": "^1.6.0",
-    "fflate": "^0.8.2"
-  },
   "files": [
     "dist/*.js",
     "dist/*.d.ts"
   ],
+  "dependencies": {
+    "@alttiri/base85": "^1.7.5",
+    "cbor-x": "^1.6.0",
+    "fflate": "^0.8.2"
+  },
   "scripts": {
     "build": "bun build ./src/index.ts --outfile=dist/index.js && bun run build:declaration",
     "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json",
