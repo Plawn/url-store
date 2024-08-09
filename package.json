@@ -1,10 +1,11 @@
 {
   "name": "@petite-org/url-store",
   "module": "src/index.ts",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "rimraf": "^6.0.1"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +24,6 @@
   "dependencies": {
     "@alttiri/base85": "^1.7.5",
     "cbor-x": "^1.6.0",
-    "fflate": "^0.8.2",
-    "rimraf": "^6.0.1"
+    "fflate": "^0.8.2"
   }
 }
