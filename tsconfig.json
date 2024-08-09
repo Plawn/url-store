@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
+    "module": "ESNext", // ou "ES6"
+    "target": "ES6", // ou une version compatible avec le navigateur
+    "lib": ["DOM", "ES6", "ESNext",], // Inclure les API du DOM
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     // Enable latest features
-    "lib": ["ESNext", "DOM"],
-    "target": "ESNext",
-    "module": "ESNext",
+    // "lib": ["ESNext", "DOM"],
+    // "target": "ESNext",
+    // "module": "ESNext",
     "moduleDetection": "force",
     "jsx": "react-jsx",
     "allowJs": true,
 
     // Bundler mode
-    "moduleResolution": "bundler",
+    // "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
@@ -23,5 +30,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
-  }
+  },
+  "include": ["src/**/*"]
 }

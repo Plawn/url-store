@@ -1,9 +1,8 @@
 import { CborAdapter, type BytesFormatAdapter } from "./adapter";
-export { UrlStore, JsonUrlStore } from "./base_store";
 import { zlibHandler, type CompressionHandler } from "./compression";
 import { base85UrlIO, type BytesUrlIO } from "./encoder";
 import { StructuredUrlCompressedStore } from "./struturedStore";
-
+export { UrlStore, JsonUrlStore } from "./base_store";
 export type {
     BytesUrlIO, CompressionHandler, BytesFormatAdapter
 }
