@@ -15,7 +15,7 @@ export const base85UrlIO = new Base85UrlIO();
  * @param key key of the store in the url
  * @returns
  */
-export function makeDefaultStore<Key extends string, T extends string>(key: Key) {
+export function makeDefaultStore<Key extends string, T>(key: Key) {
   return new StructuredUrlCompressedStore<Key, T>(
     key,
     new CborAdapter(),

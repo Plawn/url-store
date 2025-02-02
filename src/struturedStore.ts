@@ -9,7 +9,7 @@ import type { BytesUrlIO } from "./encoder";
  *
  * data -> bytes -> compression -> bytesToString -> key in url
  */
-export class StructuredUrlCompressedStore<Key extends string, T extends string>
+export class StructuredUrlCompressedStore<Key extends string, T>
   extends UrlStore<T> {
   private readonly formatAdapter: BytesFormatAdapter<T>;
   private readonly compressHandler: CompressionHandler;
