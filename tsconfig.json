@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "ESNext", // ou "ES6"
     "target": "ES6", // ou une version compatible avec le navigateur
-    "lib": ["DOM", "ES6", "ESNext",], // Inclure les API du DOM
+    "lib": ["DOM", "ES6", "ESNext"], // Inclure les API du DOM
     "moduleResolution": "node",
     "outDir": "./dist",
     "esModuleInterop": true,
