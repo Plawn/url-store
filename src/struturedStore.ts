@@ -28,7 +28,7 @@ export class StructuredUrlCompressedStore<Key extends string, T extends string>
   }
 
   protected adaptFromUrl(s: string): T {
-    const decoded = this.bytesAdapter.encode(s);
+    const decoded = this.bytesAdapter.decode(s);
     const decompressed = this.compressHandler.decompress(decoded);
     const result = this.formatAdapter.decode(decompressed);
     return result;
@@ -36,6 +36,6 @@ export class StructuredUrlCompressedStore<Key extends string, T extends string>
   protected adaptToUrl(t: T): string {
     const result = this.formatAdapter.encode(t);
     const compressed = this.compressHandler.compress(result);
-    return this.bytesAdapter.decode(compressed);
+    return this.bytesAdapter.encode(compressed);
   }
 }
