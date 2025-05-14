@@ -1,5 +1,6 @@
 import type { Store } from "./interface";
 
+// TODO: implement in top of the flat store, execept it's only one key
 export abstract class UrlStore<T> implements Store<T> {
   readonly key: string;
 
@@ -7,17 +8,28 @@ export abstract class UrlStore<T> implements Store<T> {
     this.key = key;
   }
 
-  protected load(): string | undefined | null {
-    const urlParams = new URLSearchParams(window.location.search);
+  protected load(searchParams?: string): string | undefined | null {
+    const urlParams = new URLSearchParams(
+      searchParams || window.location.search,
+    );
     const d = urlParams.get(this.key);
     return d;
   }
 
-  protected setInUrl(s: string) {
+  /**
+   * If we set push to false, then the caller is responsible for updating the url
+   * @param s
+   * @param push
+   * @returns
+   */
+  protected setInUrl(s: string, push: boolean = true): string {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set(this.key, s);
-    const path = "?" + urlParams.toString();
-    window.history.pushState({ path }, "", path);
+    const searchParams = "?" + urlParams.toString();
+    if (push) {
+      window.history.pushState({ path: searchParams }, "", searchParams);
+    }
+    return searchParams;
   }
 
   protected abstract adaptFromUrl(s: string): T;
@@ -30,15 +42,24 @@ export abstract class UrlStore<T> implements Store<T> {
     window.history.pushState({ path }, "", path);
   }
 
-  get(): T | undefined {
-    const d = this.load();
+  /**
+   * @param searchParams optional current params to parse -> in case we want reactive usage
+   * @returns
+   */
+  get(searchParams?: string): T | undefined {
+    const d = this.load(searchParams);
     if (d) {
       return this.adaptFromUrl(d);
     }
   }
-  set(t: T): void {
+  /**
+   * If we set push to false, then the caller is responsible for updating the url
+   * @param t
+   * @param push
+   */
+  set(t: T, push = true): string {
     const encoded = this.adaptToUrl(t);
-    this.setInUrl(encoded);
+    return this.setInUrl(encoded, push);
   }
 }
 
@@ -65,6 +86,7 @@ export abstract class FlatUrlStore<T> implements Store<T> {
     });
     const path = "?" + urlParams.toString();
     window.history.pushState({ path }, "", path);
+    return path;
   }
 
   protected abstract adaptFromUrl(s: { [key: string]: string }): T;
@@ -83,9 +105,9 @@ export abstract class FlatUrlStore<T> implements Store<T> {
       return this.adaptFromUrl(d);
     }
   }
-  set(t: T): void {
+  set(t: T): string {
     const encoded = this.adaptToUrl(t);
-    this.setInUrl(encoded);
+    return this.setInUrl(encoded);
   }
 }
 
@@ -113,7 +135,6 @@ export class JsonUrlStore<T> extends UrlStore<T> {
   }
 }
 
-
 /**
  * Simplest store, using no compression
  */
@@ -136,4 +157,3 @@ export class FlatJsonUrlStore<T extends Object> extends FlatUrlStore<T> {
     return res;
   }
 }
-
